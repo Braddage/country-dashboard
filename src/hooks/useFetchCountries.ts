@@ -3,7 +3,9 @@ import { Country } from '../types/Country';
 
 const useFetchCountries = () => {
     const [countries, setCountries] = useState<Country[]>([]);
-    const [loading, setLoading] = useState(true);
+
+    const [loading, setLoading] = useState(true);        // for use in loading wheel later
+
     const [error, setError] = useState<string | null>(null);
   
     useEffect(() => {
