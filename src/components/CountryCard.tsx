@@ -27,7 +27,6 @@ const CountryCard: React.FC<CountryCardProps> = ({ country, onClick }) => {
         <p><strong>Capital:</strong> {country.capital ? country.capital[0] : 'N/A'}</p>
         <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
         <p><strong>Region:</strong> {country.region}</p>
-        <p><strong>Timezone:</strong> {country.timezones}</p>
       </div>
     </div>
   );
