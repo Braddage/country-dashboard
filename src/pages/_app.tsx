@@ -5,6 +5,7 @@ import CountryCard from '../components/CountryCard';
 import CountryModal from '../components/CountryModal';
 import Sidebar from '../components/Sidebar';
 import styles from '../styles/HomePage.module.css';
+import LazyLoad from '../components/LazyLoad';
 import Head from 'next/head';
 import '../styles/globals.css';
 
@@ -86,11 +87,13 @@ const HomePage = () => {
 
       <div className={styles.countryGrid}>
         {filteredCountries.map((country) => (
-          <CountryCard
-            key={country.name.common}
-            country={country}
-            onClick={() => handleCardClick(country)}
-          />
+          <LazyLoad key={country.name.common}>
+            <CountryCard
+                key={country.name.common}
+                country={country}
+                onClick={() => handleCardClick(country)}
+            />
+          </LazyLoad>
         ))}
       </div>
 
