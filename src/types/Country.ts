@@ -7,4 +7,5 @@ export interface Country {
     currencies?: object;
     languages?: object;
     timezones?: string[];
+    latlng?: number[];
 }

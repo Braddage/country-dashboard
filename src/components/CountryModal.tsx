@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import styles from '../styles/CountryModal.module.css';
 import Image from 'next/image';
 import { Country } from '../types/Country';
+import CountryMap from './CountryMap';
 
 interface CountryModalProps {
     country: Country;
@@ -40,6 +41,8 @@ interface CountryModalProps {
           <p><strong>Currencies:</strong> {Object.keys(country.currencies || {}).join(', ')}</p>
           <p><strong>Languages:</strong> {Object.values(country.languages || {}).join(', ')}</p>
           <p><strong>Timezones:</strong> {Object.values(country.timezones || {}).join(', ')}</p>
+
+          <CountryMap country={country} />
 
           {onCompare && (
             <button className={styles.compareButton} onClick={onCompare}>
