@@ -37,6 +37,7 @@
 }
 
 .compareButton {
+    padding-top: 20px;
     width: 50%;
     padding: 10px;
     border: none;

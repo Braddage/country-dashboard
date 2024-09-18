@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import styles from '../styles/ComparisonModal.module.css';
 import Image from 'next/image';
 import { Country } from '../types/Country';
+import CountryMap from './CountryMap';
 
 interface ComparisonModalProps {
   country: Country;
@@ -39,6 +40,8 @@ const CountryModal: React.FC<ComparisonModalProps> = ({ country, country2, onClo
       <p><strong>Currencies:</strong> {Object.keys(country.currencies || {}).join(', ')}</p>
       <p><strong>Languages:</strong> {Object.values(country.languages || {}).join(', ')}</p>
       <p><strong>Timezones:</strong> {Object.values(country.timezones || {}).join(', ')}</p>
+
+      <CountryMap country={country} />
     </div>
   );
 
