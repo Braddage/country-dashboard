@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from '../styles/Sidebar.module.css';
+import { useDarkMode } from '../context/DarkModeContext';
 
 interface SidebarProps {
   regions: string[];
@@ -18,37 +19,38 @@ const Sidebar: React.FC<SidebarProps> = ({
   onSortByPopulation,
   onSearch,
 }) => {
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedTimezone, setSelectedTimezone] = useState('');
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
-    onSearch(query); // Send the search query to the parent component
+    onSearch(query);
   };
 
   const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const region = e.target.value;
     setSelectedRegion(region);
-    onFilterRegion(region); // Filter countries by selected region
+    onFilterRegion(region);
   };
 
   const handleTimezoneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const timezone = e.target.value;
     setSelectedTimezone(timezone);
-    onFilterTimezone(timezone); // Filter countries by selected timezone
+    onFilterTimezone(timezone);
   };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onSortByPopulation(e.target.value as 'asc' | 'desc'); // Sort countries by population
+    onSortByPopulation(e.target.value as 'asc' | 'desc');
   };
 
   return (
-    <div className={styles.sidebar}>
+    <div className={`${styles.sidebar} ${darkMode ? 'dark-mode' : ''}`}>
       <h2>Country Data Dashboard</h2>
       
-      {/* Search by Name or Capital */}
       <div className={styles.filterGroup}>
         <label>Search by Name or Capital:</label>
         <input
@@ -59,7 +61,6 @@ const Sidebar: React.FC<SidebarProps> = ({
         />
       </div>
 
-      {/* Filter by Region */}
       <div className={styles.filterGroup}>
         <label>Filter by Region:</label>
         <select value={selectedRegion} onChange={handleRegionChange}>
@@ -70,7 +71,6 @@ const Sidebar: React.FC<SidebarProps> = ({
         </select>
       </div>
 
-      {/* Filter by Timezone */}
       <div className={styles.filterGroup}>
         <label>Filter by Timezone:</label>
         <select value={selectedTimezone} onChange={handleTimezoneChange}>
@@ -81,7 +81,6 @@ const Sidebar: React.FC<SidebarProps> = ({
         </select>
       </div>
 
-      {/* Sort by Population */}
       <div className={styles.filterGroup}>
         <label>Sort by Population:</label>
         <select onChange={handleSortChange}>
@@ -89,6 +88,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           <option value="desc">Descending</option>
         </select>
       </div>
+
+      <button onClick={toggleDarkMode} className={styles.darkModeButton}>
+        {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      </button>
+
     </div>
   );
 };
