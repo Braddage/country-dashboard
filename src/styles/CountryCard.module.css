@@ -50,7 +50,7 @@
 }
 
 :global(.dark-mode) .countryCard {
-  background-color: rgb(85, 85, 85);
+  background-color: rgb(75, 75, 75);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -70,5 +70,5 @@
   padding-bottom: 66.66%;
   position: relative;
   overflow: hidden;
-  border-bottom: 2px solid rgb(85, 85, 85);
+  border-bottom: 2px solid #f0f0f0;
 }

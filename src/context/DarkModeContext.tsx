@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Create a context for dark mode
 const DarkModeContext = createContext<{
   darkMode: boolean;
   toggleDarkMode: () => void;
@@ -9,14 +8,12 @@ const DarkModeContext = createContext<{
   toggleDarkMode: () => {},
 });
 
-// Custom hook to use dark mode context
+
 export const useDarkMode = () => useContext(DarkModeContext);
 
-// DarkModeProvider to wrap the app
 export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
 
-  // Check for user's preferred color scheme
   useEffect(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setDarkMode(prefersDark);
@@ -31,7 +28,7 @@ export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   // Function to toggle dark mode and save preference
   const toggleDarkMode = () => {
     setDarkMode((prevMode) => {
-      localStorage.setItem('darkMode', String(!prevMode)); // Save preference
+      localStorage.setItem('darkMode', String(!prevMode));
       return !prevMode;
     });
   };

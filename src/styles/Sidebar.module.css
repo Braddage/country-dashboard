@@ -18,7 +18,7 @@
   margin-bottom: 50px;
   font-size: 32px;
   text-align: center;
-  color: #ecf0f1;
+  color: #ffffff;
 }
 
 .filterGroup {
@@ -81,7 +81,7 @@
 }
 
 :global(.dark-mode) .sidebar h2 {
-  color: #cfcfcf;
+  color: #ffffff;
 }
 
 :global(.dark-mode) .filterGroup input,
