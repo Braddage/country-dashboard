@@ -89,7 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </select>
       </div>
 
-      <button onClick={toggleDarkMode} className={styles.darkModeButton}>
+      <button onClick={toggleDarkMode}> {/* Consider changing to slider, unsure of exact name (O=O)  */}
         {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       </button>
 

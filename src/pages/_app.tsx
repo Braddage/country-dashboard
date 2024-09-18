@@ -1,10 +1,10 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { DarkModeProvider } from '../context/DarkModeContext'; // Import DarkModeProvider
+import { DarkModeProvider } from '../context/DarkModeContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <DarkModeProvider> {/* Wrap the whole app with the provider */}
+    <DarkModeProvider>
       <Component {...pageProps} />
     </DarkModeProvider>
   );
