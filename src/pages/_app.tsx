@@ -3,6 +3,7 @@ import useFetchCountries from '../hooks/useFetchCountries';
 import { Country } from '../types/Country';
 import CountryCard from '../components/CountryCard';
 import CountryModal from '../components/CountryModal';
+import ComparisonModal from '../components/ComparisonModal'
 import Sidebar from '../components/Sidebar';
 import styles from '../styles/HomePage.module.css';
 import LazyLoad from '../components/LazyLoad';
@@ -11,11 +12,15 @@ import '../styles/globals.css';
 
 const HomePage = () => {
   const { countries, loading, error } = useFetchCountries();
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [filteredCountries, setFilteredCountries] = useState<Country[]>(countries);
 
-  // Prevents there being no cards displayed on refresh.
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isComparing, setIsComparing] = useState(false);
+  const [compareCountry, setCompareCountry] = useState<Country | null>(null);
+  const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
+
   useEffect(() => {
     if (countries.length > 0) {
       setFilteredCountries(countries);
@@ -23,13 +28,26 @@ const HomePage = () => {
   }, [countries]);
 
   const handleCardClick = (country: Country) => {
-    setSelectedCountry(country);
-    setIsModalOpen(true);
+    if (isComparing) {
+      setCompareCountry(country);
+      setIsCompareModalOpen(true);
+    } else {
+      setSelectedCountry(country);
+      setIsModalOpen(true);
+    }
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setIsCompareModalOpen(false)
     setSelectedCountry(null);
+    setCompareCountry(null);
+    setIsComparing(false);
+  };
+
+  const handleCompareClick = () => {
+    setIsComparing(true);
+    setIsModalOpen(false);
   };
 
   const handleFilterRegion = (region: string) => {
@@ -100,6 +118,15 @@ const HomePage = () => {
       {isModalOpen && selectedCountry && (
         <CountryModal
           country={selectedCountry}
+          onClose={handleCloseModal}
+          onCompare={handleCompareClick}
+        />
+      )}
+
+      {isCompareModalOpen && selectedCountry && compareCountry && (
+        <ComparisonModal
+          country={selectedCountry}
+          country2={compareCountry}
           onClose={handleCloseModal}
         />
       )}

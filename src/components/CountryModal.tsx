@@ -6,9 +6,10 @@ import { Country } from '../types/Country';
 interface CountryModalProps {
     country: Country;
     onClose: () => void;
+    onCompare?: () => void;
   }
 
-  const CountryModal: React.FC<CountryModalProps> = ({ country, onClose }) => {
+  const CountryModal: React.FC<CountryModalProps> = ({ country, onClose, onCompare }) => {
   
     useEffect(() => {
       document.body.style.overflow = 'hidden';
@@ -39,6 +40,13 @@ interface CountryModalProps {
           <p><strong>Currencies:</strong> {Object.keys(country.currencies || {}).join(', ')}</p>
           <p><strong>Languages:</strong> {Object.values(country.languages || {}).join(', ')}</p>
           <p><strong>Timezones:</strong> {Object.values(country.timezones || {}).join(', ')}</p>
+
+          {onCompare && (
+            <button className={styles.compareButton} onClick={onCompare}>
+                Compare with Another Country
+            </button>
+      )}
+
         </div>
       </div>
     );

@@ -7,6 +7,7 @@
     background: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
+    gap: 30px;
     align-items: center;
     z-index: 1000;
 }
@@ -36,15 +37,13 @@
     cursor: pointer;
 }
 
-.compareButton {
-    width: 50%;
+.filterGroup select {
+    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #34495e;
     color: white;
-    cursor: pointer;
-
 }
 
 @keyframes expand {
