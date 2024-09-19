@@ -17,32 +17,32 @@ Make sure you have the following installed on your machine:
 
 Clone the Repository
 
-```
-git clone (https://github.com/Braddage/country-dashboard)
+```bash
+git clone https://github.com/Braddage/country-dashboard
 cd country-dashboard
 ```
 
 Run one of the following commands to install the required dependencies:
 
-```
+```bash
 npm install
 ```
 
 or 
 
-```
+```bash
 yarn install
 ```
 
 Use one of the following commands to start the development server:
 
-```
+```bash
 npm run dev
 ```
 
 or 
 
-```
+```bash
 yarn dev
 ```
 
