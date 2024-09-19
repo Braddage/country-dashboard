@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, {useState} from 'react';
 import styles from '../styles/Sidebar.module.css';
 import { useDarkMode } from '../context/DarkModeContext';
 
@@ -52,9 +52,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       <h2>Country Data Dashboard</h2>
       
       <div className={styles.filterGroup}>
-        <label>Search by Name or Capital:</label>
+        <label htmlFor="search-input">Search by Name or Capital:</label>
         <input
           type="text"
+          id="search-input"          
           value={searchQuery}
           onChange={handleSearch}
           placeholder="Search by name or capital"
@@ -62,8 +63,8 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       <div className={styles.filterGroup}>
-        <label>Filter by Region:</label>
-        <select value={selectedRegion} onChange={handleRegionChange}>
+        <label htmlFor="region-input">Filter by Region:</label>
+        <select id="region-input" value={selectedRegion} onChange={handleRegionChange}>
           <option value="">All Regions</option>
           {regions.map((region) => (
             <option key={region} value={region}>{region}</option>

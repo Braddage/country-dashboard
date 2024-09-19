@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import styles from '../styles/CountryModal.module.css';
 import Image from 'next/image';
 import { Country } from '../types/Country';
