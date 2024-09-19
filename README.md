@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Country Data Dashboard - a web application that provides detailed information about countries, allowing users to search, filter by region or timezone, sort by population, and compare country data. 
+
+Built with Next.js, React, and TypeScript, featuring an interactive UI for exploring country details, and utilizing Leaflet for map usage.
 
 ## Getting Started
 
