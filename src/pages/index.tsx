@@ -8,11 +8,16 @@ import Sidebar from '../components/Sidebar';
 import styles from '../styles/HomePage.module.css';
 import LazyLoad from '../components/LazyLoad';
 import Head from 'next/head';
-import { useDarkMode } from '../context/DarkModeContext'; // Import dark mode hook
+import { useDarkMode } from '../context/DarkModeContext';
 
 const HomePage = () => {
   const { countries, loading, error } = useFetchCountries();
   const [filteredCountries, setFilteredCountries] = useState<Country[]>(countries);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('');
+  const [selectedTimezone, setSelectedTimezone] = useState('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +25,7 @@ const HomePage = () => {
   const [compareCountry, setCompareCountry] = useState<Country | null>(null);
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
 
-  const { darkMode } = useDarkMode(); // Use dark mode from the global context
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     if (darkMode) {
@@ -31,10 +36,29 @@ const HomePage = () => {
   }, [darkMode]);
 
   useEffect(() => {
-    if (countries.length > 0) {
-      setFilteredCountries(countries);
+    let filtered = [...countries];
+
+    if (searchQuery) {
+      filtered = filtered.filter(country =>
+        country.name.common.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (country.capital && country.capital[0].toLowerCase().includes(searchQuery.toLowerCase()))
+      );
     }
-  }, [countries]);
+
+    if (selectedRegion) {
+      filtered = filtered.filter(country => country.region === selectedRegion);
+    }
+
+    if (selectedTimezone) {
+      filtered = filtered.filter(country => (country.timezones ?? []).includes(selectedTimezone));
+    }
+
+    filtered = filtered.sort((a, b) => {
+      return sortOrder === 'asc' ? a.population - b.population : b.population - a.population;
+    });
+
+    setFilteredCountries(filtered);
+  }, [searchQuery, selectedRegion, selectedTimezone, sortOrder, countries]);
 
   const handleCardClick = (country: Country) => {
     if (isComparing) {
@@ -60,35 +84,19 @@ const HomePage = () => {
   };
 
   const handleFilterRegion = (region: string) => {
-    if (region === '') {
-      setFilteredCountries(countries);
-    } else {
-      setFilteredCountries(countries.filter((country) => country.region === region));
-    }
+    setSelectedRegion(region);
   };
 
   const handleFilterTimezone = (timezone: string) => {
-    if (timezone === '') {
-      setFilteredCountries(countries);
-    } else {
-      setFilteredCountries(countries.filter((country) => (country.timezones ?? []).includes(timezone)));
-    }
+    setSelectedTimezone(timezone);
   };
 
   const handleSortByPopulation = (order: 'asc' | 'desc') => {
-    const sortedCountries = [...filteredCountries].sort((a, b) => {
-      return order === 'asc' ? a.population - b.population : b.population - a.population;
-    });
-    setFilteredCountries(sortedCountries);
+    setSortOrder(order);
   };
 
   const handleSearch = (query: string) => {
-    setFilteredCountries(
-      countries.filter((country) =>
-        country.name.common.toLowerCase().includes(query.toLowerCase()) ||
-        (country.capital && country.capital[0].toLowerCase().includes(query.toLowerCase()))
-      )
-    );
+    setSearchQuery(query);
   };
 
   const uniqueRegions = Array.from(new Set(countries.map((country) => country.region).filter(Boolean)));
@@ -97,7 +105,6 @@ const HomePage = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  
   return (
     <div className={`${styles.container} ${darkMode ? 'dark-mode' : ''}`}>
       <Head>
