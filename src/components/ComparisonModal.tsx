@@ -34,13 +34,16 @@ const CountryModal: React.FC<ComparisonModalProps> = ({ country, country2, onClo
         height={200}
         className={styles.flagImage}
       />
-      <p><strong>Capital:</strong> {country.capital ? country.capital[0] : 'N/A'}</p>
-      <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
-      <p><strong>Region:</strong> {country.region}</p>
-      <p><strong>Currencies:</strong> {Object.keys(country.currencies || {}).join(', ')}</p>
-      <p><strong>Languages:</strong> {Object.values(country.languages || {}).join(', ')}</p>
-      <p><strong>Timezones:</strong> {Object.values(country.timezones || {}).join(', ')}</p>
 
+      <div className={styles.countryDetailsGrid}>
+        <p><strong>Capital:</strong> {country.capital ? country.capital[0] : 'N/A'}</p>
+        <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
+        <p><strong>Region:</strong> {country.region}</p>
+        <p><strong>Currencies:</strong> {Object.keys(country.currencies || {}).join(', ')}</p>
+        <p><strong>Languages:</strong> {Object.values(country.languages || {}).join(', ')}</p>
+        <p><strong>Timezones:</strong> {Object.values(country.timezones || {}).join(', ')}</p>
+      </div>
+      
       <CountryMap country={country} />
     </div>
   );

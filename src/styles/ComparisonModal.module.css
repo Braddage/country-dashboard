@@ -10,6 +10,7 @@
   gap: 30px;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
 }
 
 .modalContent {
@@ -17,9 +18,23 @@
   border-radius: 10px;
   width: 80%;
   max-width: 600px;
+  max-height: 80vh;
   padding: 2rem;
   position: relative;
+  overflow: auto;
   animation: expand 0.2s ease-out forwards;
+}
+
+.countryDetailsGrid {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(3, minmax(0px, auto));
+  gap: 20px;
+}
+
+.countryDetailsGrid p {
+  margin: 0;
 }
 
 .flagImage {
