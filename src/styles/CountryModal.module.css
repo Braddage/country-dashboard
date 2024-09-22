@@ -9,21 +9,36 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
 }
 
 .modalContent {
   background: white;
   border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
+  max-width: 800px;
+  max-height: 80vh;
   padding: 2rem;
   position: relative;
+  overflow: auto;
   animation: expand 0.2s ease-out forwards;
 }
 
 .flagImage {
   max-width: 100%;
   border-radius: 10px;
+  margin: 10px;
+}
+
+.countryDetailsGrid {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(3, minmax(0px, auto));
+  gap: 10px;
+}
+
+.countryDetailsGrid p {
+  margin: 0;
 }
 
 .closeButton {
@@ -37,15 +52,16 @@
 }
 
 .compareButton {
+  display: block;
+  margin: 20px auto;
   padding-top: 20px;
-  width: 50%;
+  width: 60%;
   padding: 10px;
   border: none;
   border-radius: 5px;
   background-color: #34495e;
   color: white;
   cursor: pointer;
-
 }
 
 @keyframes expand {
@@ -53,31 +69,17 @@
     transform: scale(0.5);
     opacity: 0;
   }
-
   100% {
     transform: scale(1);
     opacity: 1;
   }
 }
 
-
 :global(.dark-mode) .compareButton {
-  padding-top: 20px;
-  width: 50%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
   background-color: #1a1a1a;
   color: rgb(255, 255, 255);
-  cursor: pointer;
 }
 
 :global(.dark-mode) .modalContent {
   background: rgb(48, 48, 48);
-  border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
-  padding: 2rem;
-  position: relative;
-  animation: expand 0.2s ease-out forwards;
 }
